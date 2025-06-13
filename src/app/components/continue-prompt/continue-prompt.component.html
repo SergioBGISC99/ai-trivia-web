@@ -4,20 +4,22 @@
   <div
     class="bg-slate-800 text-white p-6 rounded-xl max-w-sm w-full space-y-4 text-center animate-fade"
   >
-    <h3 class="text-xl font-semibold text-sky-300">
+    <h3
+      class="text-xl font-extrabold mb-4 text-center text-sky-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+    >
       ¿Quieres otra pregunta del mismo tema?
     </h3>
 
     <div class="flex flex-col gap-3">
       <button
         (click)="choose('same')"
-        class="px-4 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold rounded-md transition duration-300"
+        class="px-4 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold transition duration-300 py-2 rounded-lg disabled:opacity-50 shadow-lg hover:scale-[1.02] active:translate-y-px"
       >
         Sí, del mismo tema
       </button>
       <button
         (click)="choose('change')"
-        class="px-4 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold rounded-md transition duration-300"
+        class="px-4 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold transition duration-300 py-2 rounded-lg disabled:opacity-50 shadow-lg hover:scale-[1.02] active:translate-y-px"
       >
         Cambiar de tema
       </button>

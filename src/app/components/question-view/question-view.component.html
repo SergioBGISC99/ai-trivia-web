@@ -4,7 +4,9 @@
   <div
     class="w-full max-w-xl bg-slate-800 text-white p-6 rounded-xl shadow-xl space-y-4 animate-fade"
   >
-    <h2 class="md:text-2xl text-lg font-semibold text-sky-300 text-center mb-6">
+    <h2
+      class="md:text-2xl text-lg font-extrabold mb-4 text-center text-sky-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+    >
       {{ questionData().question }}
     </h2>
 
@@ -13,7 +15,7 @@
       <button
         (click)="selectAnswer($index)"
         [disabled]="selectedIndex() !== null"
-        class="px-4 py-3 rounded-md text-center transition cursor-pointer bg-slate-700 hover:bg-slate-600 disabled:opacity-60 disabled:cursor-not-allowed border-2"
+        class="px-4 py-3 font-bold shadow-md shadow-slate-500 rounded-md text-center transition duration-300 cursor-pointer bg-slate-700 hover:bg-slate-600 disabled:opacity-60 disabled:cursor-not-allowed border-2 hover:scale-[1.02] active:translate-y-px"
         [ngClass]="{
           'border-sky-400 bg-sky-600 text-white': selectedIndex() === $index
         }"

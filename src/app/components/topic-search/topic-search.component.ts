@@ -8,10 +8,11 @@ import { QuestionResponse } from '../../models/question.response';
 import { AiService } from '../../services/ai.service';
 import { ToastService } from '../../services/toast.service';
 import { LoaderComponent } from '../loader/loader.component';
+import { QuestionViewComponent } from '../question-view/question-view.component';
 
 @Component({
   selector: 'app-topic-search',
-  imports: [LoaderComponent],
+  imports: [LoaderComponent, QuestionViewComponent],
   templateUrl: './topic-search.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -32,7 +33,20 @@ export class TopicSearchComponent {
     this.aiService.generateGeminiQuestion(this.topic()).subscribe({
       next: (resp) => {
         this.response.set(resp);
-        this.toastService.showSuccess('Pregunta generada con éxito!', 'Éxito');
+        this.loading.set(false);
+        this.topic.set('');
+      },
+      error: (err) => {
+        console.error(err);
+        this.checkOpenAI();
+      },
+    });
+  }
+
+  async checkOpenAI() {
+    this.aiService.generateOpenAIQuestion(this.topic()).subscribe({
+      next: (resp) => {
+        this.response.set(resp);
       },
       error: (err) => {
         console.error(err);
@@ -41,6 +55,29 @@ export class TopicSearchComponent {
       complete: () => {
         this.loading.set(false);
         this.topic.set('');
+      },
+    });
+  }
+
+  async validateAnswer(index: number) {
+    this.loading.set(true);
+
+    const questionId = this.response()!.id;
+
+    this.aiService.validateAnswer(index, questionId).subscribe({
+      next: (resp) => {
+        if (resp.isCorrect) {
+          this.toastService.showSuccess('Respuesta correcta', 'Felicidades🥳');
+        } else {
+          this.toastService.showInfo('Respuesta incorrecta', 'Mala suerte😣');
+        }
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastService.showError('No se pudo validar la respuesta', 'Error');
+      },
+      complete: () => {
+        this.loading.set(false);
       },
     });
   }

@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { QuestionResponse } from '../models/question.response';
 
@@ -13,18 +13,28 @@ export class AiService {
 
   generateGeminiQuestion(topic: string): Observable<QuestionResponse> {
     const encodedTopic = encodeURIComponent(topic.trim());
-    return this.http
-      .get<QuestionResponse>(`${this.apiUrl}/gemini/question/${encodedTopic}`)
-      .pipe(
-        catchError((err: HttpErrorResponse) => {
-          if (err.status === 503) {
-            return this.http.get<QuestionResponse>(
-              `${this.apiUrl}/gpt/question/${encodedTopic}`
-            );
-          }
+    return this.http.get<QuestionResponse>(
+      `${this.apiUrl}/gemini/question/${encodedTopic}`
+    );
+  }
 
-          return throwError(() => err);
-        })
-      );
+  generateOpenAIQuestion(topic: string): Observable<QuestionResponse> {
+    const encodedTopic = encodeURIComponent(topic.trim());
+    return this.http.get<QuestionResponse>(
+      `${this.apiUrl}/gpt/question/${encodedTopic}`
+    );
+  }
+
+  validateAnswer(
+    answerIndex: number,
+    questionId: string
+  ): Observable<{ isCorrect: boolean }> {
+    return this.http.post<{ isCorrect: boolean }>(
+      `${this.apiUrl}/question/check-answer`,
+      {
+        answerIndex: answerIndex.toString(),
+        questionId: questionId,
+      }
+    );
   }
 }

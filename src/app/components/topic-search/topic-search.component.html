@@ -2,7 +2,15 @@
 
 <app-loader />
 
+} @else { @if(response()) {
+
+<app-question-view
+  [questionData]="response()!"
+  (anwserSelected)="validateAnswer($event)"
+/>
+
 } @else {
+
 <div
   class="transition-opacity duration-300 ease-in-out opacity-100 animate-fade"
 >
@@ -37,5 +45,4 @@
     </div>
   </div>
 </div>
-
-}
+} }

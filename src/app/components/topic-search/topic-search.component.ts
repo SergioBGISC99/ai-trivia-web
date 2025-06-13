@@ -5,7 +5,8 @@ import {
   signal,
 } from '@angular/core';
 import { QuestionResponse } from '../../models/question.response';
-import { GeminiService } from '../../services/gemini.service';
+import { AiService } from '../../services/ai.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-topic-search',
@@ -15,7 +16,8 @@ import { GeminiService } from '../../services/gemini.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopicSearchComponent {
-  geminiService = inject(GeminiService);
+  aiService = inject(AiService);
+  toastService = inject(ToastService);
 
   topic = signal('');
   loading = signal(false);
@@ -25,15 +27,16 @@ export class TopicSearchComponent {
     const value = this.topic().trim();
     if (!value) return;
 
-    console.log(value);
     this.loading.set(true);
 
-    this.geminiService.generateQuestion(this.topic()).subscribe({
+    this.aiService.generateGeminiQuestion(this.topic()).subscribe({
       next: (resp) => {
         this.response.set(resp);
+        this.toastService.showSuccess('Pregunta generada con éxito!', 'Éxito');
       },
       error: (err) => {
         console.error(err);
+        this.toastService.showError('No se pudo generar la pregunta', 'Error');
       },
       complete: () => {
         this.loading.set(false);

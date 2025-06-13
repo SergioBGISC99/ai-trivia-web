@@ -7,12 +7,12 @@ import {
 import { QuestionResponse } from '../../models/question.response';
 import { AiService } from '../../services/ai.service';
 import { ToastService } from '../../services/toast.service';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-topic-search',
-  imports: [],
+  imports: [LoaderComponent],
   templateUrl: './topic-search.component.html',
-  styleUrl: './topic-search.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopicSearchComponent {

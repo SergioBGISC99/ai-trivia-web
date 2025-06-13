@@ -2,6 +2,7 @@
 @import "tailwindcss";
 
 #toast-container > div {
+  margin-top: 20px;
   border-radius: 0.75rem;
 }
 
@@ -23,4 +24,19 @@
 .toast-warning {
   background-color: #facc15 !important;
   color: #1a1a1a !important;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade {
+  animation: fade 0.3s ease-in-out;
 }

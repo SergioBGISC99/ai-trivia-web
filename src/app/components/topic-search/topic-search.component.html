@@ -1,8 +1,10 @@
 <div
-  class="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-50"
+  class="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-br from-slate-900 via-blue-900 to-sky-400 text-white"
 >
   <div class="w-full max-w-md">
-    <h1 class="text-2xl font-bold mb-4 text-center text-gray-800">
+    <h1
+      class="text-3xl font-extrabold mb-4 text-center text-sky-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+    >
       Generar pregunta de trivia por tema
     </h1>
 
@@ -13,12 +15,13 @@
         (input)="topic.set($any($event.target).value)"
         (keyup.enter)="search()"
         placeholder="Ej. One Piece, Historia, Ciencia..."
-        class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        class="flex-1 px-4 py-2 rounded-lg bg-slate-800 border border-sky-400 text-white placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-400 shadow-md"
       />
+
       <button
         (click)="search()"
         [disabled]="loading()"
-        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition duration-300"
+        class="px-4 py-2 bg-sky-500 text-slate-900 font-semibold rounded-lg hover:bg-sky-400 disabled:opacity-50 transition duration-200 shadow-lg hover:scale-[1.02] active:translate-y-px"
       >
         Buscar
       </button>

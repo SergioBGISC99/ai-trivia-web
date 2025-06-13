@@ -54,8 +54,6 @@ export class TopicSearchComponent {
       error: (err) => {
         console.error(err);
         this.toastService.showError('No se pudo generar la pregunta', 'Error');
-      },
-      complete: () => {
         this.loading.set(false);
       },
     });

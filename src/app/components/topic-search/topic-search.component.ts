@@ -9,10 +9,11 @@ import { AiService } from '../../services/ai.service';
 import { ToastService } from '../../services/toast.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { QuestionViewComponent } from '../question-view/question-view.component';
+import { ContinuePromptComponent } from '../continue-prompt/continue-prompt.component';
 
 @Component({
   selector: 'app-topic-search',
-  imports: [LoaderComponent, QuestionViewComponent],
+  imports: [LoaderComponent, QuestionViewComponent, ContinuePromptComponent],
   templateUrl: './topic-search.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -24,17 +25,19 @@ export class TopicSearchComponent {
   loading = signal(false);
   response = signal<QuestionResponse | null>(null);
 
+  showContinuePrompt = signal(false);
+
   async search() {
     const value = this.topic().trim();
     if (!value) return;
 
     this.loading.set(true);
+    this.response.set(null);
 
     this.aiService.generateGeminiQuestion(this.topic()).subscribe({
       next: (resp) => {
         this.response.set(resp);
         this.loading.set(false);
-        this.topic.set('');
       },
       error: (err) => {
         console.error(err);
@@ -54,7 +57,6 @@ export class TopicSearchComponent {
       },
       complete: () => {
         this.loading.set(false);
-        this.topic.set('');
       },
     });
   }
@@ -69,11 +71,24 @@ export class TopicSearchComponent {
         } else {
           this.toastService.showInfo('Respuesta incorrecta', 'Mala suerte😣');
         }
+
+        this.showContinuePrompt.set(true);
       },
       error: (err) => {
         console.error(err);
         this.toastService.showError('No se pudo validar la respuesta', 'Error');
       },
     });
+  }
+
+  async handleContinuePrompt(value: 'same' | 'change') {
+    if (value === 'same') {
+      this.search();
+    } else {
+      this.response.set(null);
+      this.topic.set('');
+    }
+
+    this.showContinuePrompt.set(false);
   }
 }

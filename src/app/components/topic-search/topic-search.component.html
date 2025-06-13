@@ -2,7 +2,7 @@
 
 <app-loader />
 
-} @else { @if(response()) {
+} @else if (response()) {
 
 <app-question-view
   [questionData]="response()!"
@@ -45,4 +45,6 @@
     </div>
   </div>
 </div>
-} }
+} @if(showContinuePrompt()){
+<app-continue-prompt (action)="handleContinuePrompt($event)" />
+}

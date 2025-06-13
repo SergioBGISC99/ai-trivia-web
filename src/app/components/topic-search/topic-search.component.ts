@@ -60,8 +60,6 @@ export class TopicSearchComponent {
   }
 
   async validateAnswer(index: number) {
-    this.loading.set(true);
-
     const questionId = this.response()!.id;
 
     this.aiService.validateAnswer(index, questionId).subscribe({
@@ -75,9 +73,6 @@ export class TopicSearchComponent {
       error: (err) => {
         console.error(err);
         this.toastService.showError('No se pudo validar la respuesta', 'Error');
-      },
-      complete: () => {
-        this.loading.set(false);
       },
     });
   }

@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
-  OnInit,
   output,
 } from '@angular/core';
 import { QuestionResponse } from '../../models/question.response';
@@ -14,13 +13,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './continue-prompt.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContinuePromptComponent implements OnInit {
+export class ContinuePromptComponent {
   userAnswer = input.required<QuestionResponse>();
   action = output<'same' | 'change'>();
-
-  ngOnInit(): void {
-    console.log(this.userAnswer());
-  }
 
   choose(option: 'same' | 'change') {
     this.action.emit(option);

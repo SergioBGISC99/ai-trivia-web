@@ -1,5 +1,8 @@
 export interface QuestionResponse {
-  id:       string;
+  id: string;
   question: string;
-  answers:  string[];
+  answers: string[];
+  yourAnswer: number;
+  correctAnswer: number;
+  isCorrect?: boolean;
 }

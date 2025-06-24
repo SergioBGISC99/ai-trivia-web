@@ -28,8 +28,8 @@ export class AiService {
   validateAnswer(
     answerIndex: number,
     questionId: string
-  ): Observable<{ isCorrect: boolean }> {
-    return this.http.post<{ isCorrect: boolean }>(
+  ): Observable<QuestionResponse> {
+    return this.http.post<QuestionResponse>(
       `${this.apiUrl}/question/check-answer`,
       {
         answerIndex: answerIndex.toString(),

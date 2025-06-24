@@ -46,5 +46,8 @@
   </div>
 </div>
 } @if(showContinuePrompt()){
-<app-continue-prompt (action)="handleContinuePrompt($event)" />
+<app-continue-prompt
+  (action)="handleContinuePrompt($event)"
+  [userAnswer]="response()!"
+/>
 }

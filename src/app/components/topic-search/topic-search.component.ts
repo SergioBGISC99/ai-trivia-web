@@ -64,6 +64,8 @@ export class TopicSearchComponent {
 
     this.aiService.validateAnswer(index, questionId).subscribe({
       next: (resp) => {
+        this.response.set(resp);
+
         if (resp.isCorrect) {
           this.toastService.showSuccess('Respuesta correcta', 'Felicidades🥳');
         } else {

@@ -4,24 +4,52 @@
   <div
     class="bg-slate-800 text-white p-6 rounded-xl max-w-sm w-full space-y-4 text-center animate-fade"
   >
+    <h2
+      class="text-xl font-extrabold mb-4 text-center text-red-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+      [ngClass]="{
+        'text-red-300': !userAnswer().isCorrect,
+        'text-green-300': userAnswer().isCorrect
+      }"
+    >
+      {{ userAnswer().isCorrect ? "Bien hecho" : "Mala suerte" }}
+    </h2>
+
+    @if(!userAnswer().isCorrect) {
+    <p class="text-lg font-bold">La pregunta fue:</p>
+    <p class="text-lg font-bold">{{ userAnswer().question }}</p>
+    <p class="text-lg font-bold">
+      Tu respuesta:
+      <span class="text-red-300">{{
+        userAnswer().answers[userAnswer().yourAnswer]
+      }}</span>
+    </p>
+    <p class="text-lg font-bold">
+      Respuesta correcta:
+      <span class="text-green-300">
+        {{ userAnswer().answers[userAnswer().correctAnswer] }}
+      </span>
+    </p>
+
+    }
+
     <h3
-      class="text-xl font-extrabold mb-4 text-center text-sky-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+      class="text-lg font-extrabold mb-4 text-center text-sky-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
     >
       ¿Quieres otra pregunta del mismo tema?
     </h3>
 
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-row gap-3 justify-evenly">
       <button
         (click)="choose('same')"
-        class="px-4 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold transition duration-300 py-2 rounded-lg disabled:opacity-50 shadow-lg hover:scale-[1.02] active:translate-y-px"
+        class="px-4 w-40 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold transition duration-300 py-2 rounded-lg disabled:opacity-50 shadow-lg hover:scale-105 active:translate-y-px"
       >
-        Sí, del mismo tema
+        <p class="text-sm">Sí, del mismo tema</p>
       </button>
       <button
         (click)="choose('change')"
-        class="px-4 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold transition duration-300 py-2 rounded-lg disabled:opacity-50 shadow-lg hover:scale-[1.02] active:translate-y-px"
+        class="px-4 w-40 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold transition duration-300 py-2 rounded-lg disabled:opacity-50 shadow-lg hover:scale-105 active:translate-y-px"
       >
-        Cambiar de tema
+        <p class="text-sm">Cambiar de tema</p>
       </button>
     </div>
   </div>

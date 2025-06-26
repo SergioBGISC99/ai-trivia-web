@@ -6,10 +6,11 @@ import {
 } from '@angular/core';
 import { QuestionResponse } from '../../models/question.response';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-continue-prompt',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './continue-prompt.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

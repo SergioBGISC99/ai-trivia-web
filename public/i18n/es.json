@@ -1,0 +1,13 @@
+{
+  "HELLO": "Generar pregunta de trivia por tema",
+  "TOPIC_PLACEHOLDER": "Ejemplo: One Piece, Historia, Ciencia",
+  "SEARCH_BUTTON": "Buscar",
+  "BAD_LUCK_TITLE": "Mala suerte",
+  "GOOD_LUCK_TITLE": "Bien hecho",
+  "BAD_LUCK_MESSAGE": "La pregunta fue",
+  "USER_ANSWER": "Tu respuesta",
+  "CORRECT_ANSWER": "Respuesta correcta",
+  "NEXT_QUESTION": "¿Quieres otra pregunta del mismo tema?",
+  "REPEAT_TOPIC": "Sí, del mismo tema",
+  "CHANGE_TOPIC": "No, cambiemos de tema"
+}

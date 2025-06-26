@@ -10,10 +10,16 @@ import { ToastService } from '../../services/toast.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { QuestionViewComponent } from '../question-view/question-view.component';
 import { ContinuePromptComponent } from '../continue-prompt/continue-prompt.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-topic-search',
-  imports: [LoaderComponent, QuestionViewComponent, ContinuePromptComponent],
+  imports: [
+    LoaderComponent,
+    QuestionViewComponent,
+    ContinuePromptComponent,
+    TranslateModule,
+  ],
   templateUrl: './topic-search.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

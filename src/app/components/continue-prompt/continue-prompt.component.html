@@ -11,20 +11,24 @@
         'text-green-300': userAnswer().isCorrect
       }"
     >
-      {{ userAnswer().isCorrect ? "Bien hecho" : "Mala suerte" }}
+      {{
+        userAnswer().isCorrect
+          ? ("GOOD_LUCK_TITLE" | translate)
+          : ("BAD_LUCK_TITLE" | translate)
+      }}
     </h2>
 
     @if(!userAnswer().isCorrect) {
-    <p class="text-lg font-bold">La pregunta fue:</p>
+    <p class="text-lg font-bold">{{ "BAD_LUCK_MESSAGE" | translate }}</p>
     <p class="text-lg font-bold">{{ userAnswer().question }}</p>
     <p class="text-lg font-bold">
-      Tu respuesta:
+      {{ "USER_ANSWER" | translate }}
       <span class="text-red-300">{{
         userAnswer().answers[userAnswer().yourAnswer]
       }}</span>
     </p>
     <p class="text-lg font-bold">
-      Respuesta correcta:
+      {{ "CORRECT_ANSWER" | translate }}
       <span class="text-green-300">
         {{ userAnswer().answers[userAnswer().correctAnswer] }}
       </span>
@@ -35,7 +39,7 @@
     <h3
       class="text-lg font-extrabold mb-4 text-center text-sky-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
     >
-      ¿Quieres otra pregunta del mismo tema?
+      {{ "NEXT_QUESTION" | translate }}
     </h3>
 
     <div class="flex flex-row gap-3 justify-evenly">
@@ -43,13 +47,13 @@
         (click)="choose('same')"
         class="px-4 w-40 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold transition duration-300 py-2 rounded-lg disabled:opacity-50 shadow-lg hover:scale-105 active:translate-y-px"
       >
-        <p class="text-sm">Sí, del mismo tema</p>
+        <p class="text-sm">{{ "REPEAT_TOPIC" | translate }}</p>
       </button>
       <button
         (click)="choose('change')"
         class="px-4 w-40 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold transition duration-300 py-2 rounded-lg disabled:opacity-50 shadow-lg hover:scale-105 active:translate-y-px"
       >
-        <p class="text-sm">Cambiar de tema</p>
+        <p class="text-sm">{{ "CHANGE_TOPIC" | translate }}</p>
       </button>
     </div>
   </div>

@@ -21,7 +21,7 @@
       <h1
         class="text-3xl font-extrabold mb-4 text-center text-sky-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
       >
-        Generar pregunta de trivia por tema
+        {{ "HELLO" | translate }}
       </h1>
 
       <div class="flex gap-2">
@@ -30,7 +30,7 @@
           [value]="topic()"
           (input)="topic.set($any($event.target).value)"
           (keyup.enter)="search()"
-          placeholder="Ej. One Piece, Historia, Ciencia..."
+          [placeholder]="'TOPIC_PLACEHOLDER' | translate"
           class="flex-1 px-4 py-2 rounded-lg bg-slate-800 border border-sky-400 text-white placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-400 shadow-md"
         />
 
@@ -39,7 +39,7 @@
           [disabled]="loading()"
           class="px-4 py-2 bg-sky-500 text-slate-900 font-semibold rounded-lg hover:bg-sky-400 disabled:opacity-50 transition duration-200 shadow-lg hover:scale-[1.02] active:translate-y-px"
         >
-          Buscar
+          {{ "SEARCH_BUTTON" | translate }}
         </button>
       </div>
     </div>
